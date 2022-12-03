@@ -1,0 +1,10 @@
+# environment to run analysis logic
+channels:
+- conda-forge
+- nodefaults
+dependencies:
+- python=3.10
+- pandas
+- matplotlib
+- notebook
+- jupytext

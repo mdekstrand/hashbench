@@ -62,6 +62,7 @@ fn main() -> Result<()> {
     Box::new(stdout())
   };
 
+  writeln!(&mut out, "hash\tMiB/s")?;
   bench_and_print(&mut out, &bench, "MD5", crypto_hashes::md5::Md5::new)?;
   bench_and_print(&mut out, &bench, "SHA-1", crypto_hashes::sha1::Sha1::new)?;
   bench_and_print(&mut out, &bench, "SHA-256", crypto_hashes::sha2::Sha256::new)?;
