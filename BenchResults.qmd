@@ -1,28 +1,18 @@
 ---
-jupytext:
-  formats: ipynb,md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.14.1
-kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
-  name: python3
+title: Benchmark Results
+format:
+  html:
+    code-fold: true
+jupyter: python3
 ---
 
-# Benchmark Results
-
 This notebook shows the results of running the benchmark program on various systems.
-
-+++
 
 ## Setup
 
 Let's import some libraries we will need:
 
-```{code-cell} ipython3
+```{python}
 from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -30,11 +20,11 @@ import matplotlib.pyplot as plt
 
 And import the results:
 
-```{code-cell} ipython3
+```{python}
 rdir = Path('results')
 ```
 
-```{code-cell} ipython3
+```{python}
 results = pd.concat({
     f.stem: pd.read_table(f, sep='\t')
     for f in rdir.glob('*.tsv')
@@ -45,20 +35,21 @@ results = pd.concat({
 
 Let's compute a result table, showing MiB/s for each algorithm:
 
-```{code-cell} ipython3
+```{python}
 tbl = results.pivot(index='System', columns='hash', values='MiB/s')
-tbl
+tbl.style.format(precision=1).set_table_attributes('class="dataframe table table-striped"')
 ```
 
 And a barchart for fun:
 
-```{code-cell} ipython3
+```{python}
 tbl.T.plot.barh()
 plt.xlabel('MiB/s')
 plt.ylabel('Hash')
 plt.show()
 ```
 
-```{code-cell} ipython3
-
-```
+The i7-11xx processors have Intel's SHA hash extensions which RustCrypto can use
+for SHA-1 and SHA-256, which explains the substantially higher performance of
+those hashes on that chip, even though it is a laptop CPU (compared to the
+desktop i9 in the test processors).
