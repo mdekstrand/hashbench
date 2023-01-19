@@ -5,6 +5,7 @@ use std::{io::Write, path::PathBuf};
 use anyhow::Result;
 use clap::Parser;
 use crypto_hashes::digest::Digest;
+use crypto_hashes::digest::typenum::U32;
 use friendly::{bytes, duration};
 use happylog::clap::LogOpts;
 use log::*;
@@ -103,6 +104,12 @@ fn main() -> Result<()> {
         &bench,
         "SHA3-512",
         crypto_hashes::sha3::Sha3_512::new,
+    )?;
+    bench_and_print(
+        &mut out,
+        &bench,
+        "Blake2b-256",
+        crypto_hashes::blake2::Blake2b::<U32>::new,
     )?;
 
     Ok(())
