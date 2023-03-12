@@ -1,4 +1,5 @@
 # environment to run analysis logic
+name: hashbench
 channels:
 - conda-forge
 - nodefaults
@@ -7,4 +8,4 @@ dependencies:
 - pandas
 - matplotlib
 - notebook
-- jupytext
+- quarto
