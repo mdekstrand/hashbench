@@ -1,5 +1,5 @@
 project:
   title: "hashbench"
-
-
-
+format:
+  html: default
+  ipynb: default

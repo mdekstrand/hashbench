@@ -1,8 +1,5 @@
 ---
 title: HashBench results
-format:
-  html: default
-  ipynb: default
 ---
 
 # Benchmark Results
